@@ -50,7 +50,28 @@ def insert_into_tree(current_node: TreeNode, key: int, value: int) -> TreeNode:
 
     return current_node
 
+
+def rotate_right(pivot: TreeNode):
+    root = pivot.parent
+    root.left = pivot.right
+    pivot.right = root
+    pivot.parent = root.parent
+    if root.parent.left == root:
+        root.parent.left = pivot
+    elif root.parent.right == root:
+        root.parent.right = pivot
+    root.parent = pivot
+
 def rotate_left(pivot: TreeNode):
+    root = pivot.parent
+    root.right = pivot.left
+    pivot.left = root
+    pivot.parent = root.parent
+    if root.parent.left == root:
+        root.parent.left = pivot
+    elif root.parent.right == root:
+        root.parent.right = pivot
+    root.parent = pivot
 
 
 def count_blacks(current_node: TreeNode) -> int:
@@ -77,13 +98,13 @@ root = insert_into_tree(root, 9, 1)
 root = insert_into_tree(root, 50, 1)
 root = insert_into_tree(root, 57, 1)
 root = insert_into_tree(root, 68, 1)
-root = insert_into_tree(root, 43, 1)
-root = insert_into_tree(root, 46, 1)
+#root = insert_into_tree(root, 43, 1)
+#root = insert_into_tree(root, 46, 1)
 
 
 print_inorder(root, "")
 print()
 print("asdfgsadgfsadfasdfsadfasdfasddfsadfasdfasdfasfdasdf")
 print()
-rotate_left(root.right.left)
+rotate_left(root.right.right)
 print_inorder(root, "")
