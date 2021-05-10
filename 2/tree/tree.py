@@ -1,8 +1,10 @@
 from enum import Enum
 
+
 class TreeNodeColor(Enum):
     red = 0
     black = 1
+
 
 class TreeNode:
     left: 'TreeNode' = None
@@ -18,7 +20,9 @@ class TreeNode:
     def get_right(self):
         return self.right
 
+
 count = 0
+
 
 def insert_into_tree(current_node: TreeNode, key: int, value: int) -> TreeNode:
     global count
@@ -31,11 +35,13 @@ def insert_into_tree(current_node: TreeNode, key: int, value: int) -> TreeNode:
         return current_node
 
     if current_node.key < key:
-        current_node.right = insert_into_tree(current_node.get_right(), key, value)
+        current_node.right = insert_into_tree(
+            current_node.get_right(), key, value)
         current_node.right.parent = current_node
 
     if current_node.key > key:
-        current_node.left = insert_into_tree(current_node.get_left(), key, value)
+        current_node.left = insert_into_tree(
+            current_node.get_left(), key, value)
         current_node.left.parent = current_node
 
     if current_node.color == TreeNodeColor.red:
@@ -43,10 +49,9 @@ def insert_into_tree(current_node: TreeNode, key: int, value: int) -> TreeNode:
 
         #right_blacks = count_blacks(current_node.right)
         #left_blacks = count_blacks(current_node.left)
-        #if left_blacks - right_blacks < -1:
+        # if left_blacks - right_blacks < -1:
 
-        #if right_blacks - left_blacks < -1:
-
+        # if right_blacks - left_blacks < -1:
 
     return current_node
 
@@ -61,6 +66,7 @@ def rotate_right(pivot: TreeNode):
     elif root.parent.right == root:
         root.parent.right = pivot
     root.parent = pivot
+
 
 def rotate_left(pivot: TreeNode):
     root = pivot.parent
@@ -84,13 +90,16 @@ def count_blacks(current_node: TreeNode) -> int:
     black_count += count_blacks(current_node.get_right())
     return black_count
 
+
 def print_inorder(current_node: TreeNode, test):
     if current_node == None:
         return
 
     print_inorder(current_node.get_left(), test + "-")
-    print(test, current_node.key, current_node.parent.key if current_node.parent is not None else -1)
+    print(test, current_node.key,
+          current_node.parent.key if current_node.parent is not None else -1, current_node.color)
     print_inorder(current_node.get_right(), test + "-")
+
 
 root = None
 root = insert_into_tree(root, 35, 1)
@@ -102,9 +111,12 @@ root = insert_into_tree(root, 68, 1)
 #root = insert_into_tree(root, 46, 1)
 
 
-print_inorder(root, "")
-print()
-print("asdfgsadgfsadfasdfsadfasdfasddfsadfasdfasdfasfdasdf")
-print()
-rotate_left(root.right.right)
+# print_inorder(root, "")
+# print()
+# print("asdfgsadgfsadfasdfsadfasdfasddfsadfasdfasdfasfdasdf")
+# print()
+# rotate_left(root.right.right)
+
+print(count_blacks(root))
+
 print_inorder(root, "")

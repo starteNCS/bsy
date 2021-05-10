@@ -19,8 +19,8 @@ for z in zip(ankunft, bearbeitungszeit):
     ankunft_tree.insert(z[0], z[1])
 
 tic = time.perf_counter()
-start = []
-end = []
+start: list = []
+end: list = []
 latest = 0.
 
 def do_work(key: float, value: float):
@@ -54,4 +54,3 @@ print(f"Took {toc - tic:0.4f}")
 
 plt.hist(end - ankunft, bins=100)
 plt.show()
-print(f"Took {toc - tic:0.4f}")
